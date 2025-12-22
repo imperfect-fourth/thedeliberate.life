@@ -1,0 +1,11 @@
+baseURL: https://thedeliberate.life/
+languageCode: en-us
+title: A Deliberate Life
+
+module:
+  imports:
+  - path: github.com/hanwenguo/hugo-theme-nostyleplease
+
+params:
+  theme_config:
+    appearance: dark
