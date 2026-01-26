@@ -5,7 +5,23 @@ title: A Deliberate Life
 module:
   imports:
   - path: github.com/hanwenguo/hugo-theme-nostyleplease
+    ignoreImports: true
+    mounts:
+    - source: layouts
+      target: layouts
+    - source: assets
+      target: assets
+    - source: data
+      target: data
+    - source: static
+      target: static
 
 params:
   theme_config:
     appearance: dark
+taxonomies:
+  tag: tags
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
