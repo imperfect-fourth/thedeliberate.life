@@ -1,6 +1,6 @@
 +++
 date = '2026-02-11T14:46:13+05:30'
-draft = true
+draft = false
 tags = ['Go']
 title = 'Logical shifts and Arithmetic shifts'
 +++
@@ -92,12 +92,13 @@ n >>= 6      // 0b11111111 (sign bit is 1. n = -1)
 
 <br>
 Here's how the math works out. 7-bit left-shift is equivalent to multiply by 2⁷:
+
 ```text
 1 * 2⁷ = 128
 ```
-128 is outside of int8 range, so the value overflows to -128.
+128 is outside of int8 range and the value overflows to -128.
 
-7-bit right-shift is equivalent to division by 2⁷, and we get:
+Then, 7-bit right-shift is equivalent to division by 2⁷, and we get:
 ```text
 -128 / 2⁷ = -1
 ```
@@ -124,7 +125,7 @@ In both cases, the sign bit is lost after the second left-shift. The values
 overflow as intended.
 
 [<a id="anchor-1-dst" href="#anchor-1-src">*</a>] So, technically, arithmetic
-shifts don't "_preserve_" the sign bit in right-shift. The behaviour is
+shifts don't "_preserve_" the sign bit in a right-shift. The behaviour is
 simply the outcome of signed integer arithmetic in two's complement form.
 
 ---
