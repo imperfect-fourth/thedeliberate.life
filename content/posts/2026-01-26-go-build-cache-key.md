@@ -66,7 +66,7 @@ name, build flags, etc. And, apart from the contents, it also includes the
 _**absolute**_ path for all the files in the package 
 (you can see it in the go source [here](https://cs.opensource.google/go/go/+/master:src/cmd/go/internal/work/exec.go;l=425-427?q=exec.go&ss=go%2Fgo:src%2Fcmd%2Fgo%2Finternal%2F)).
 The absolute path for the package in the docker build was /app/<package>,
-which doesn't match the path on the host machince where the go build cache was
+which doesn't match the path on the host machine where the go build cache was
 built. Even for the dependencies, the file paths are prefixed with GOMODCACHE
 env var (or the path for the vendor/ directory if the dependencies are
 vendored). So, even when I mounted the build cache during the docker build,

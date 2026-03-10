@@ -1,9 +1,12 @@
 +++
 date = '2026-03-09T11:47:31+05:30'
-draft = true
+draft = false
 title = 'Go-lfing: Bracket Validator'
 tags = ['go', 'golf']
 +++
+
+Go-lfing *(verb)*: Code
+golf<sup>[<a id="anchor-0-src" href="#anchor-0-dest">0</a>]</sup>-ing in Go.
 
 ---
 ## An oasis in desert
@@ -18,19 +21,15 @@ characters as possible.
 
 The original problem was for python but I'll attempt it in Go.
 
-<details>
-	<summary>Go-lfing</summary>
-	Code golf<sup>[<a id="anchor-0-src" href="#anchor-0-dest">0</a>]</sup>-ing
-	in Go.
-</details>
-
 ---
 
 ## Constraints and assumptions
 
-1. I'll write a function that takes a string as input, and returns true if 
+1. I'll write a function that takes a string as input, and returns true if
 the string is a valid bracket pattern, otherwise false.
-2. <span id="assumption-2"></span>The string will only contain characters from set "(){}[]".
+2. The input string will contain characters only from set "(){}[]".
+3. All characters in the file including package, imports, and whitespaces will
+be counted.
 
 ## Iteration #0: Baseline (307)
 
@@ -157,7 +156,7 @@ and remove goto as well.
 [[git diff]](https://github.com/imperfect-fourth/go-lfing/compare/240b1a910ed833ce4b88544cf1a264d8085e24cf..c0518555c5a4ec7efa83e2cef0d354a9dbc52089#diff-1366140ce5704c8e97606a6bde609a6297d518bbea62835d4cf522ea0bee7d08L8)
 
 ---
-## Iteration #4: A little *bit* of magic
+## Iteration #4: A little *bit* of magic (221)
 I love bit manipulation. I'm always looking for some bit magic in
 the wild.
 
@@ -217,7 +216,7 @@ the open bracket check in the if statement:
 [[git diff]](https://github.com/imperfect-fourth/go-lfing/commit/18c7e69d8524bc3db0d89527fa90dbd282f4b8cf)
 
 ---
-## Iteration #5: Eliminate out of bounds check
+## Iteration #5: Eliminate out of bounds check (211)
 
 A little bit of tweaking can eliminate the out of bounds check in the else if
 condition(`l < 0`):
@@ -253,7 +252,7 @@ out of bounds check.
 
 ---
 
-## Iteration #5.5: Little Drops of Water
+## Iteration #5.5: Little Drops of Water (201)
 
 1. `false` can be written as `0>1` which saves 2 characters.
 	```diff
@@ -298,7 +297,7 @@ virtue of assumption <a href="#constraints-and-assumptions">#2</a>:
 [[git diff]](https://github.com/imperfect-fourth/go-lfing/commit/4ff4255157060ff77f970575899ca8b44ad441d1)
 
 ---
-## Iteration #6: Minify
+## Iteration #6: Minify (147)
 
 I finally minified the code because at this point I couldn't think of any other
 improvements.
@@ -309,7 +308,7 @@ package g;func f(s string)bool{b,l:=make([]rune,len(s)+1),1;for _,c:=range s{if 
 [[git diff]](https://github.com/imperfect-fourth/go-lfing/commit/83181cd097c9714d9adbe1062630d4e401034693)
 
 ---
-## Iteration #7: Remove early return
+## Iteration #7: Remove early return (144)
 
 Instead of doing an early return, I used an accumulator(I'm showing un-minified
 diff, although I was working with minified code at this point.):
@@ -336,10 +335,10 @@ diff, although I was working with minified code at this point.):
 [[git diff]](https://github.com/imperfect-fourth/go-lfing/commit/fe98a8aa0b3fbe1f356a65361007a5ae2bc112a0)
 
 ---
-## Iteration #8: Make it short, not fast
-Iteration #7 was a breakthrough. Even though the code is much less efficient, it is
-better in the context of the challenge. This gave me a mental shift: make it
-short, not fast (said no one ever).
+## Iteration #8: Make it short, not fast (143)
+Iteration #7 was a breakthrough. Even though the code is much less efficient,
+it is better in the context of the challenge. This gave me a mental shift: make
+it short, not fast (said no one ever).
 
 There's another solution for bracket validation, but it is much much worse than
 this stack based solution(again, I'm showing the un-minified version):
@@ -379,7 +378,7 @@ This version (minified) saved a whopping 1 character over the previous one.
 [[git diff]](https://github.com/imperfect-fourth/go-lfing/commit/e81c056cd54a16574e8ff6ad257a9ff47b269720)
 
 ---
-## Iteration #9: Make it worse!
+## Iteration #9: Make it worse! (139)
 I'll let the diff speak for itself:
 
 ```diff
@@ -398,7 +397,7 @@ func f(s string) bool {
 [[git diff]](https://github.com/imperfect-fourth/go-lfing/commit/cc9a12496586c61bf2ae6729342061b82aac1ce3)
 
 ---
-## Iteration #10: Eliminate len
+## Iteration #10: Eliminate len (132)
 ```diff
 -	l := 0
 +	z := ""
@@ -417,8 +416,12 @@ func f(s string) bool {
 ---
 ## All good things must come to an end.
 
-This gave me a reprieve from my boredom for a couple of days. I begin my quest
-anew for more mentally stimulating challenges.
+The final character count is 132. We started at 307. I did do a cursory search
+to see if this is the best possible solution in Go, but I couldn't find any
+other attempts. If you know a better solution, reach out to me. 
+
+This gave me a reprieve from my boredom for a couple of days. I now begin my
+quest anew for more mentally stimulating challenges.
 
 ---
 ## PS
