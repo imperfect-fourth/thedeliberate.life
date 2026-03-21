@@ -1,9 +1,16 @@
 entries:
   - title: all posts
     post_list:
+      section: posts
       limit: 5
       show_more: true
       show_more_text: See archive
       show_more_url: posts
+  - title: homelab logs
+    post_list:
+      section: homelab-logs
+      limit: 5
+      show_more: true
+      show_more_url: homelab_logs
   - title: rss
     url: index.xml
