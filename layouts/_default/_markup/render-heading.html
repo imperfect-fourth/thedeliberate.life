@@ -1,0 +1,25 @@
+{{- if not (.Page.Scratch.Get "heading-anchor-style") -}}
+{{- .Page.Scratch.Set "heading-anchor-style" true -}}
+<style>
+.heading-anchor {
+  opacity: 0;
+  font-size: 0.85em;
+  margin-left: 0.3em;
+  text-decoration: none;
+}
+h2:hover .heading-anchor,
+h3:hover .heading-anchor,
+h4:hover .heading-anchor,
+h5:hover .heading-anchor,
+h6:hover .heading-anchor {
+  opacity: 0.5;
+}
+.heading-anchor:hover {
+  opacity: 1 !important;
+}
+</style>
+{{- end -}}
+<h{{ .Level }} id="{{ .Anchor }}">
+  {{- .Text | safeHTML -}}
+  <a class="heading-anchor" href="#{{ .Anchor }}" aria-label="Anchor">#</a>
+</h{{ .Level }}>
